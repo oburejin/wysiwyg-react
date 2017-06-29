@@ -3,7 +3,7 @@ import {DragDropContext} from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ReactDOM from 'react-dom';
 import List from './dnd/list.jsx';
-import Container from './dnd/container.jsx';
+
 import './s/app.sass';
 
 class App extends Component {
@@ -13,6 +13,7 @@ class App extends Component {
     return (
       <div>
         <List/>
+
       </div>
     )
   }
