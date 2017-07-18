@@ -1,3 +1,3 @@
-# React starter
+# wysiwyg react test
 
-ʅʕ•ᴥ•ʔʃ
+react + redux
