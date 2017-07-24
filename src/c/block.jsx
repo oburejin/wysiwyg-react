@@ -25,8 +25,6 @@ class Block extends Component {
         <div className='block' style={{backgroundColor: colors[id%colors.length]}}>
           Block #{id} | {this.ok}
           <Element id={id}/>
-          {/* {(id==1)?<iframe src="https://vuejs.org/v2/guide/" frameBorder="1"></iframe>: ''}
-          {(id==2)?<iframe src="https://vuejs.org/v2/guide/installation.html" frameBorder="1"></iframe>: ''} */}
           <ControlPanel block_position={position}/>
         </div>
         <AddBlock position={position}/>
