@@ -71,9 +71,11 @@ const blocks_reducer = (state = [], action) => {
       // state.blocks.splice(index, 1);
       return state;
     }
+
     case 'ADD_BLOCK': { 
-      console.log('ADD_BLOCK to position:', action.position);
-      state.blocks = [...s.slice(0, action.position), {id: state.next_block_id}, ...s.slice(action.position)];
+      console.log('13')
+      console.log('ADD_BLOCK', action.element ,'to position:', action.position);
+      state.blocks = [...s.slice(0, action.position), {id: state.next_block_id, element: action.element}, ...s.slice(action.position)];
       state.next_block_id++;
       return state;
     }

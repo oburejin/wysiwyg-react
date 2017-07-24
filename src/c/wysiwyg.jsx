@@ -15,6 +15,7 @@ class Wysiwyg extends Component {
                     position={index} 
                     id={item.id} 
                     key={item.id}
+                    element={item.element}
                     is_hollow={item.is_hollow}
               />
     });

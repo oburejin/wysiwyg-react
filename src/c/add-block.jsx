@@ -10,32 +10,25 @@ class AddBlock extends Component {
   }
 
   open_panel () {
-    this.panel.classList.remove('hidden');
-    this.add_button.classList.add('hidden');
-
+    this.add_block.focus();
   }
 
-  close_panel () {
-    this.add_button.classList.remove('hidden');
-    this.panel.classList.add('hidden');
-  }
-
-  dispatch_add () {
+  dispatch_add (type) {
     let { store } = this.context;
     store.dispatch({
       type: 'ADD_BLOCK',
-      position: this.props.position + 1
+      position: this.props.position + 1,
+      element: type
     });
-    this.close_panel();
   }
 
   render() {
     return (
-      <div className='add-block-line'>
-        <button ref={button => this.add_button = button} className='add-block' onClick={this.open_panel}>✚</button>
-        <div ref={panel => this.panel = panel} className='elements-panel mod-flex hidden'>
-          <div className='emenents-panel__element' onClick={this.dispatch_add}>Text</div>
-          <div className='emenents-panel__element' onClick={this.dispatch_add}>Widget</div>
+      <div ref={add_block => this.add_block = add_block} className='add-block-line' tabIndex='1'>
+        <button className='add-block' onClick={this.open_panel}>✚</button>
+        <div className='elements-panel mod-flex'>
+          <div className='emenents-panel__element' onClick={this.dispatch_add.bind(this, 'TEXT')}>Text</div>
+          <div className='emenents-panel__element' onClick={this.dispatch_add.bind(this, 'TEXT')}>Widget</div>
         </div>
       </div>
     )
