@@ -84,26 +84,37 @@ const blocks_reducer = (state = [], action) => {
 };
 
 let default_state = {
-  blocks: [{id: 0, is_hollow: true}, {id: 1}, {id: 2}, {id: 3}], 
+  blocks: [{id: 0}, {id: 1}, {id: 2}, {id: 3}], 
   next_block_id: 4,
   order: [0, 1, 2, 3]
 };
-const store = createStore(blocks_reducer, default_state);
+
+let stored_state = JSON.parse(localStorage.getItem('react-ww'));
+
+const store = createStore(blocks_reducer, stored_state || default_state);
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = this.state || default_state;
+    this.state = this.state || stored_state || default_state;
+    this.saveWW = this.saveWW.bind(this);
   }
   componentDidMount() {
     document.execCommand("DefaultParagraphSeparator", false, "p");
+  }
+
+  saveWW () {
+    localStorage.setItem('react-ww', JSON.stringify(store.getState()));
   }
   render() {
     
     
     return (
       <Provider store={store}>
-        <Wysiwyg />
+        <div>
+          <Wysiwyg />
+          <button onClick={this.saveWW}>SAVE</button>
+        </div>
       </Provider>
     )
   }

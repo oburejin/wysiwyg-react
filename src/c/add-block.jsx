@@ -28,7 +28,7 @@ class AddBlock extends Component {
         <button className='add-block' onClick={this.open_panel}>✚</button>
         <div className='elements-panel mod-flex'>
           <div className='emenents-panel__element' onClick={this.dispatch_add.bind(this, 'TEXT')}>Text</div>
-          <div className='emenents-panel__element' onClick={this.dispatch_add.bind(this, 'TEXT')}>Widget</div>
+          <div className='emenents-panel__element' onClick={this.dispatch_add.bind(this, 'DUD')}>DUD</div>
         </div>
       </div>
     )

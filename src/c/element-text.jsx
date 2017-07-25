@@ -6,9 +6,7 @@ class ElementText extends Component {
     super(props);
     this.updateChange = this.updateChange.bind(this);
     }
-  componentDidMount () {
-    this.first_p.focus();
-  }
+  
   updateChange () {
     console.log(this.text.innerHTML);
   }
@@ -23,7 +21,7 @@ class ElementText extends Component {
            ref={text => this.text = text}
       >
       <div className="element-text-wrapper">
-         <p className='element-text-p' ref={first_p => this.first_p = first_p}></p> 
+         <p className='element-text-p' autoFocus='true'></p>
       </div>
       
       </div>

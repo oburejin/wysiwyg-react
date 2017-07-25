@@ -19,8 +19,7 @@ class Block extends Component {
     let {
       position, 
       id,
-      element,
-      is_hollow
+      element
     } = this.props;
     
     let el = element == 'TEXT' ? <ElementText  id={id}/> : <Element  id={id}/>;

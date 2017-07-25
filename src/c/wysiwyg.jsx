@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import Block from './block.jsx';
+import  AddBlock from './add-block.jsx';
 import '../s/app.sass';
 
 class Wysiwyg extends Component {
@@ -22,6 +23,7 @@ class Wysiwyg extends Component {
  
     return (
       <div className="app">
+        <AddBlock position={-1} />
          {blocks}
       </div>
     )
