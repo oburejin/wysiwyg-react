@@ -95,6 +95,9 @@ class App extends Component {
     super(props);
     this.state = this.state || default_state;
   }
+  componentDidMount() {
+    document.execCommand("DefaultParagraphSeparator", false, "p");
+  }
   render() {
     
     

@@ -4,8 +4,14 @@ import '../s/element-text.sass';
 class ElementText extends Component {
   constructor(props){
     super(props);
+    this.updateChange = this.updateChange.bind(this);
     }
-
+  componentDidMount () {
+    this.first_p.focus();
+  }
+  updateChange () {
+    console.log(this.text.innerHTML);
+  }
   render() {
     let {
       content
@@ -13,8 +19,13 @@ class ElementText extends Component {
     return (
       <div contentEditable='true'
            className='element-text'
+           onInput={this.updateChange}
+           ref={text => this.text = text}
       >
-      <p className='element-text-p' placeholder='Enter text'></p>
+      <div className="element-text-wrapper">
+         <p className='element-text-p' ref={first_p => this.first_p = first_p}></p> 
+      </div>
+      
       </div>
     )
   }
