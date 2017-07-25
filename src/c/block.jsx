@@ -10,23 +10,33 @@ const colors = ['#ef5350', '#ec407a', '#ab47bc', '#7e57c2', '#5c6bc0', '#42a5f5'
 class Block extends Component {
   constructor(props){
     super(props);
-    this.ok = '';
+    this.update_block = this.update_block.bind(this);
     }
-  
 
+  update_block(event, data, e) {
+    let {store} = this.context;
+
+    store.dispatch({
+      type: 'UPDATE_BLOCK',
+      block_id: this.props.id,
+      block_data: event.target.innerHTML
+    });
+  }
 
   render() {
     let {
       position, 
       id,
-      element
+      element,
+      element_data
     } = this.props;
+
     
-    let el = element == 'TEXT' ? <ElementText  id={id}/> : <Element  id={id}/>;
+    let el = element == 'TEXT' ? <ElementText id={id} update={this.update_block} element_data={element_data}/> : <Element  id={id}/>;
     return (
       <div>
         <div className='block' style={{backgroundColor: colors[id%colors.length]}}>
-          Block #{id} | {this.ok}
+          Block #{id}
           {el}
           <ControlPanel block_position={position}/>
         </div>

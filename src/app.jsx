@@ -8,6 +8,7 @@ import Wysiwyg from './c/wysiwyg.jsx';
 const blocks_reducer = (state = [], action) => {
   let s = state.blocks.slice();
   switch (action.type) {
+    // ====================================
     case 'MOVE_UP': {
       let { index } = action;
       console.log('MOVE_UP block #', index);
@@ -19,11 +20,10 @@ const blocks_reducer = (state = [], action) => {
             [index - 1, 0, s[index]]
           ]
         }
-      });    
-      
-        
+      });
       return state;
     }
+    // ====================================
     case 'MOVE_TOP': {
       let { index } = action;
       console.log('MOVE_TOP block #', index);
@@ -41,6 +41,7 @@ const blocks_reducer = (state = [], action) => {
 
       return state;
     }
+    // ====================================
     case 'MOVE_DOWN': {
       let { index } = action;
       console.log('MOVE_DOWN block #', index);
@@ -55,6 +56,7 @@ const blocks_reducer = (state = [], action) => {
       });
       return state;
     }
+    // ====================================
     case 'MOVE_BOTTOM': {
       let { index } = action;
       console.log('MOVE_BOTTOM block #', index);
@@ -67,16 +69,20 @@ const blocks_reducer = (state = [], action) => {
           ]
         }
       });
-      // state.blocks = [...s.slice(0, index), ...s.slice(index + 1), s[index]];
-      // state.blocks.splice(index, 1);
       return state;
     }
-
+    // ====================================
     case 'ADD_BLOCK': { 
-      console.log('13')
       console.log('ADD_BLOCK', action.element ,'to position:', action.position);
       state.blocks = [...s.slice(0, action.position), {id: state.next_block_id, element: action.element}, ...s.slice(action.position)];
       state.next_block_id++;
+      return state;
+    }
+    // ====================================
+    case 'UPDATE_BLOCK': {
+      console.log('UPDATE_BLOCK',action.block_id, action.block_data );
+      let current_block = state.blocks.filter(block => action.block_id == block.id)[0];
+      current_block.element_data = action.block_data;
       return state;
     }
   }
