@@ -2,92 +2,8 @@ import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import update from 'react/lib/update';
 import Wysiwyg from './c/wysiwyg.jsx';
-
-const blocks_reducer = (state = [], action) => {
-  let s = state.blocks.slice();
-  switch (action.type) {
-    // ====================================
-    case 'MOVE_UP': {
-      let { index } = action;
-      console.log('MOVE_UP block #', index);
-      if (index < 1) {return state;}
-      state = update(state, {
-        blocks: {
-          $splice: [
-            [index, 1],
-            [index - 1, 0, s[index]]
-          ]
-        }
-      });
-      return state;
-    }
-    // ====================================
-    case 'MOVE_TOP': {
-      let { index } = action;
-      console.log('MOVE_TOP block #', index);
-      if (index < 1) {return state;}
-      
-      state = update(state, {
-        blocks: {
-          $splice: [
-            [index, 1],
-            [0, 0, s[index]]
-          ]
-        }
-      });
-      
-
-      return state;
-    }
-    // ====================================
-    case 'MOVE_DOWN': {
-      let { index } = action;
-      console.log('MOVE_DOWN block #', index);
-      if (index > s.length - 2) {return state;}
-      state = update(state, {
-        blocks: {
-          $splice: [
-            [index, 1],
-            [index + 1, 0, s[index]]
-          ]
-        }
-      });
-      return state;
-    }
-    // ====================================
-    case 'MOVE_BOTTOM': {
-      let { index } = action;
-      console.log('MOVE_BOTTOM block #', index);
-      if (index > s.length - 2) {return state;}
-      state = update(state, {
-        blocks: {
-          $splice: [
-            [index, 1],
-            [s.length - 1, 0, s[index]]
-          ]
-        }
-      });
-      return state;
-    }
-    // ====================================
-    case 'ADD_BLOCK': { 
-      console.log('ADD_BLOCK', action.element ,'to position:', action.position);
-      state.blocks = [...s.slice(0, action.position), {id: state.next_block_id, element: action.element}, ...s.slice(action.position)];
-      state.next_block_id++;
-      return state;
-    }
-    // ====================================
-    case 'UPDATE_BLOCK': {
-      console.log('UPDATE_BLOCK',action.block_id, action.block_data );
-      let current_block = state.blocks.filter(block => action.block_id == block.id)[0];
-      current_block.element_data = action.block_data;
-      return state;
-    }
-  }
-  return state;
-};
+import reducer from './r/reducer.js';
 
 let default_state = {
   blocks: [{id: 0}, {id: 1}, {id: 2}, {id: 3}], 
@@ -96,21 +12,15 @@ let default_state = {
 };
 
 let stored_state = JSON.parse(localStorage.getItem('react-ww'));
-
-const store = createStore(blocks_reducer, stored_state || default_state);
+const store = createStore(reducer, stored_state || default_state);
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = this.state || stored_state || default_state;
-    this.saveWW = this.saveWW.bind(this);
   }
   componentDidMount() {
     document.execCommand("DefaultParagraphSeparator", false, "p");
-  }
-
-  saveWW () {
-    localStorage.setItem('react-ww', JSON.stringify(store.getState()));
   }
   render() {
     
@@ -119,7 +29,6 @@ class App extends Component {
       <Provider store={store}>
         <div>
           <Wysiwyg />
-          <button onClick={this.saveWW}>SAVE</button>
         </div>
       </Provider>
     )

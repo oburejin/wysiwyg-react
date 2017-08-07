@@ -7,7 +7,7 @@ module.exports = (env) => {
     return webpackMerge(commonConfig(), {
         devtool: false,
         output: {
-            path: path.resolve(__dirname, '../dist'),
+            path: path.resolve(__dirname, '../docs'),
         },
        
         plugins: [
