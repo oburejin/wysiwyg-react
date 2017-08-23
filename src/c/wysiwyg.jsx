@@ -23,6 +23,7 @@ class Wysiwyg extends Component {
  
     return (
       <div className="app">
+        <h2>React</h2>
         <AddBlock position={-1} />
          {blocks}
       </div>
